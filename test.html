@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js'></script>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden; /* Hide overflow for video background */
+      background-image: url("https://i.pinimg.com/originals/d4/56/82/d456824c41a02311aa2d1d17bfc20564.jpg");
+      background-size: cover;
+    }
+    @font-face {
+  font-family: 'Rocher';
+  src: url("https://assets.codepen.io/9632/RocherColorGX.woff2");
+}
+
+body {
+  font-family: 'Rocher';
+  text-align: center;
+  font-size: 30px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  margin: 12px;
+  font-size: 30px;
+}
+
+
+
+@font-palette-values --Mint {
+  font-family: Rocher;
+  base-palette: 5;
+  base-palette: 5;
+}
+
+.mint {
+  font-palette: --Mint;
+}
+
+    
+
+    @keyframes moveUpDown {
+  0%, 100% {
+    transform: translateY(20px); /* Half of the margin-top value */
+  }
+  30% {
+    transform: translateY(0);
+  }
+}
+    #video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1; /* Behind other elements */
+    }
+
+    #status-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white; /* Text color */
+    }
+
+    #image-container {
+  width: 350px;
+  height: 400px;
+  /* overflow: hidden; */
+  position: relative;
+   /* Compensate for the margin with additional padding */
+}
+
+#image1,
+#image2 {
+  width: 100%;
+  height: 100%;
+  display: none;
+  animation: moveUpDown 2s infinite;
+}
+
+    #text1,
+    #text2 {
+      font-size: 24px;
+      margin-top: 10px;
+      color:darkgreen;
+      font-weight: 800;
+      
+    }
+
+    #text2 {
+      display: none; /* Initially hide text2 */
+    }
+
+    #data-display {
+      margin-top: 20px;
+      color:darkgreen;
+      font-weight:600;
+    }
+  </style>
+  <script>
+    var socket = io();
+
+    socket.on('data', function(data) {
+      console.log(data);
+      document.getElementById('data-display').innerText = 'Received Data: ' + data;
+
+      // Check if data is less than 900
+      if (data < 800 ) {
+        // Show image1, text1, and hide text2
+        document.getElementById('image1').style.display = 'block';
+        document.getElementById('text1').style.display = 'block';
+        document.getElementById('image2').style.display = 'none';
+        document.getElementById('text2').style.display = 'none';
+      } else {
+        // Show image2, text2, and hide text1
+        document.getElementById('image1').style.display = 'none';
+        document.getElementById('text1').style.display = 'none';
+        document.getElementById('image2').style.display = 'block';
+        document.getElementById('text2').style.display = 'block';
+      }
+    });
+  </script>
+</head>
+<body>
+  <!-- Video Background -->
+  
+
+  <div id="status-container">
+    <div class="mint" id="data-display"></div>
+    <div   id="text1">ONG thank you so much <3 <br><br></div> 
+    <div  id="text2">Please water me !!! <br><br> </div>
+  </div>
+
+  <!-- Image Container -->
+  <div id="image-container">
+    <!-- Image 1 -->
+    <img id="image1" src="https://i.pinimg.com/originals/26/d1/6e/26d16e41f97f9b08de3739245d4aa1ba.png" alt="Image 1"> 
+    <!-- Image 2 -->
+    <img id="image2" src="https://i.pinimg.com/originals/7b/4b/8d/7b4b8d1cbb76820c798624152b71caf9.png" alt="Image 2">
+  </div>
+ 
+  <h1 class="mint">WATER THE PLANT TO MAKE IT HAPPY</h1>
+</body>
+</html>

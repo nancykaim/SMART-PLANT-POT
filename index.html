@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js'></script>
+    <style>
+      #status-box {
+        width: 300px;
+        height: 100px;
+        text-align: center;
+        line-height: 100px;
+        font-size: 18px;
+        color: white;
+        transition: background-color 1s ease; 
+      }
+    </style>
+    <script>
+      var socket = io();
+
+      socket.on('data', function(data) {
+        console.log(data);
+        document.getElementById('data-display').innerText = 'Received Data: ' + data;
+
+        // Check if data is less than 900
+        if (data < 980) {
+          // Set the background color to blue and update text
+          document.getElementById('status-box').style.backgroundColor = 'blue';
+          document.getElementById('status-box').innerText = 'Status: Blue';
+        } else {
+          // Set the background color to red and update text
+          document.getElementById('status-box').style.backgroundColor = 'pink';
+          document.getElementById('status-box').innerText = 'Status: Red';
+        }
+      });
+    </script>
+  
+  </head>
+  <body>
+    <h1>Communicating from an Arduino to Node.js</h1>
+    <div id="data-display"></div>
+    <div id="status-box"></div>
+  </body>
+</html>
