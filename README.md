@@ -60,7 +60,3 @@ Create a Smart Plant Pot that detects soil moisture levels using Arduino, offeri
 
 **Conclusion:**
 The Smart Plant Pot improves water conservation and plant care by providing real-time feedback on soil moisture. This project advances sustainable practices and supports environmental consciousness through innovative technology.
-
----
-
-Feel free to adjust or expand upon any sections as needed!
